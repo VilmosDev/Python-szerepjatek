@@ -1,0 +1,135 @@
+{
+  "SHOP_SCENE": [
+    {"type": "music", "file": "sad_music.wav"},
+    {"type": "dialogue", "speaker": "Kani", "text": "Nincs pénzem kolbászra..."},
+    {"type": "choice", "prompt": "Lopjak?...", "options": [
+        {"text": "Éhezés", "target": "END_STARVE"},
+        {"text": "Lopás", "target": "SHOP_STEALING"}
+    ]}
+  ],
+  "END_STARVE": [
+    {"type": "dialogue", "speaker": "Narrator", "text": "Kaninak nem volt meg a napi kolbász adaga..."},
+    {"type": "fail", "message": "Kani éhen halt."}
+  ],
+  "SHOP_STEALING": [
+    {"type": "row_choice", "correct": 3, "fail_target": "SHOP_STEALING", "success_target": "COP_ENCOUNTER"}
+  ],
+  "COP_ENCOUNTER": [
+    {"type": "dialogue", "speaker": "Rendőr", "text": "Hova mész azzal a kolbásszal öcsi?"},
+    {"type": "choice", "options": [
+        {"text": "Beszállító vagyok", "target": "END_DELIVERY"},
+        {"text": "Haza", "target": "PRISON_STORY_START"}
+    ]}
+  ],
+  "END_DELIVERY": [
+    {"type": "dialogue", "speaker": "Rendőr", "text": "Akkor csak nyugodtan tovább, köszönjük a beszállítást!"},
+    {"type": "dialogue", "speaker": "Narrator", "text": "Kani felfalta a kolbászt."},
+    {"type": "win", "message": "Kani boldogan élt a kolbászával. Megígérte magának, hogy mostantól nem fogja az összes vagyonát felrakni feketére."}
+  ],
+  "PRISON_STORY_START": [
+    {"type": "dialogue", "speaker": "Rendőr", "text": "..."},
+    {"type": "cutscene", "task": "arrest", "duration": 2000},
+    {"type": "dialogue", "speaker": "Kani", "text": "..."},
+    {"type": "dialogue", "speaker": "Kani", "text": "A kolbászom..."},
+    {"type": "dialogue", "speaker": "Kani", "text": "Ki kell szabadulnom..."},
+    {"type": "dialogue", "speaker": "Kani", "text": "Szét kell törnöm a rácsot."},
+    {"type": "action", "task": "break_bars", "clicks": 10},
+    {"type": "dialogue", "speaker": "Kani", "text": "Jobbra zsákutca van"},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Ki vagy?"},
+    {"type": "dialogue", "speaker": "Kani", "text": "Kani"},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Új?"},
+    {"type": "dialogue", "speaker": "Kani", "text": "Igen, nem volt pénzem kolbászra, próbáltam lop-"},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Elég, itt nincs szavad."},
+    {"type": "sprite_change", "char": "Dominik", "new_sprite": "kis_tizes"},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Dominik vagyok."},
+    {"type": "dialogue", "speaker": "Kani", "text": "Én Kani"},
+    {"type": "dialogue", "speaker": "Dominik", "text": "..."},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Tudok neked segíteni."},
+    {"type": "dialogue", "speaker": "Kani", "text": "Miben?"},
+    {"type": "dialogue", "speaker": "Dominik", "text": "..."},
+    {"type": "dialogue", "speaker": "Kani", "text": "Szabadultál már?"},
+    {"type": "dialogue", "speaker": "Dominik", "text": "..."},
+    {"type": "dialogue", "speaker": "Kani", "text": "Az jó. Indulunk?"},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Ácsi, mit ajánlasz?"},
+    {"type": "choice", "options": [
+        {"text": "Kolbászt.", "target": "KEY_QUEST"},
+        {"text": "Semmit", "target": "END_LIFE_SENTENCE"}
+    ]}
+  ],
+  "END_LIFE_SENTENCE": [
+    {"type": "dialogue", "speaker": "Narrator", "text": "Kani a börtönben rohadt meg."},
+    {"type": "fail", "message": "Kani kolbász nélkül nem bírt élni."}
+  ],
+  "KEY_QUEST": [
+    {"type": "dialogue", "task":"dominik_somolyog", "duration": 2000},
+    {"type": "cutscene", "task": "konyha_1", "duration": 2000},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Ő ott Rudi, nem a legélesebb kés a fiókban. Elterelem a figyelmét, te kiveszed a kulcsot a bal farzsebéből"},
+    {"type": "cutscene", "task": "rudi_ba_eltereles", "duration": 2000},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Csumi Rudi bá"},
+    {"type": "action", "task": "steal_key", "clicks": 10},
+    {"type": "choice", "prompt": "Dominik: Na?", "options": [
+        {"text": "Megvan", "target": "SHOVEL_STORY"},
+        {"text": "Nem sikerült", "target": "SHOVEL_STORY_LIE"}
+    ]}
+  ],
+  "SHOVEL_STORY_LIE": [
+    {"type": "dialogue", "speaker": "Dominik", "text": "Tudom hogy nálad van."},
+    {"type": "choice", "options": [
+        {"text": "Várjunk", "target": "HIDING_SCENE"},
+        {"text": "Menjünk most", "target": "HOUDINIS_FAIL"}
+    ]}
+  ],
+  "SHOVEL_STORY": [
+    {"type": "dialogue", "speaker": "Dominik", "text": "Nincs itt."},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Meg kell várnunk a Borásást."},
+    {"type": "choice", "options": [
+        {"text": "Várjunk", "target": "HIDING_SCENE"},
+        {"text": "Menjünk most", "target": "HOUDINIS_FAIL"}
+    ]}
+  ],
+  "HOUDINIS_FAIL": [
+    {"type": "dialogue", "speaker": "Dominik", "text": "Nem jó ötlet, de menjünk."},
+    {"type": "choice", "prompt": "Merre?", "options": [
+        {"text": "Balra", "target": "END_RUDI_CATCH"},
+        {"text": "Jobbra", "target": "LOOP_TO_WAIT"}
+    ]}
+  ],
+  "LOOP_TO_WAIT": [
+    {"type": "dialogue", "speaker": "Dominik", "text": "Akkor mégis megvárjuk."},
+    {"type": "jump", "target": "HIDING_SCENE"}
+  ],
+  "END_RUDI_CATCH": [
+    {"type": "dialogue", "speaker": "Rudi", "text": "Megvagy!"},
+    {"type": "fail", "message": "FAIL: Rudi remembered the key."}
+  ],
+  "HIDING_SCENE": [
+    {"type": "choice", "prompt": "Hova bújjunk?", "options": [
+        {"text": "Szekrény", "target": "END_CLOSET_BUSTED"},
+        {"text": "Láda", "target": "FINAL_ESCAPE_PATH"}
+    ]}
+  ],
+  "END_CLOSET_BUSTED": [
+    {"type": "dialogue", "speaker": "Dominik", "text": "Jönnek fel az őrök..."},
+    {"type": "dialogue", "speaker": "Őrök", "text": "Megvagyunk!"},
+    {"type": "fail", "message": "FAIL: Closets are for clothes, not Kanis."}
+  ],
+  "FINAL_ESCAPE_PATH": [
+    {"type": "dialogue", "speaker": "Dominik", "text": "Merre spuri?"},
+    {"type": "choice", "options": [
+        {"text": "Udvar", "target": "END_YARD_ALARM"},
+        {"text": "Konyha", "target": "DIGGING_FINALE"}
+    ]}
+  ],
+  "END_YARD_ALARM": [
+    {"type": "dialogue", "speaker": "Rudi", "text": "Sziasztok!"},
+    {"type": "dialogue", "speaker": "Dominik", "text": "Rudi bá..."},
+    {"type": "fail", "message": "FAIL: Caught in the yard."}
+  ],
+  "DIGGING_FINALE": [
+    {"type": "action", "task": "dig_1", "clicks": 10, "prompt": "Áss! (1/3)"},
+    {"type": "action", "task": "dig_2", "clicks": 10, "prompt": "Áss! (2/3)"},
+    {"type": "action", "task": "dig_3", "clicks": 15, "prompt": "SZABADSÁG!"},
+    {"type": "dialogue", "speaker": "Rudi", "text": "Álljatok meg! Az ásót kérem vissza!"},
+    {"type": "win", "message": "SUCCESS: Into the sunset!"}
+  ]
+}
